@@ -3,6 +3,9 @@ info:
   title: User API
   version: 1.0.0
   description: User API
+servers:
+  - url: https://api.postman.com
+    description: Production server for Postman API
 
 paths:
   /users:

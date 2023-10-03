@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  title: Auth API
+  version: 1.0.0
+  description: Auth API
+servers:
+  - url: https://api.postman.com
+    description: Production server (uses live data)
+
+paths:
+  /login:
+    post:
+      parameters:
+        - name: username
+          in: header
+          schema:
+            type: string
+        - name: password
+          in: header
+          schema:
+            type: string
+      operationId: login
+      responses:
+        201:
+          description: User Login successful. Response contains token
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TokenResponse'
+        500:
+          description: Some sort of server issue
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/responses/LoginErrorResponse'
+
+components:
+  schemas:
+    TokenResponse:
+      type: object
+      properties:
+        token:
+          type: string
+
+  responses:
+    LoginErrorResponse:
+      description: Error response
+      content:
+        application/json:
+          schema:
+            properties:
+              error:
+                type: string

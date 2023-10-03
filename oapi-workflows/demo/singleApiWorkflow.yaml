@@ -10,9 +10,8 @@ sourceDocuments:
     url: https://raw.githubusercontent.com/postman-open-technologies/apis/main/oapi-workflows/demo/singleApi.yaml
     type: openapi
 
-
 workflows:
-  - workflowId: loginUserAndRetrievePet
+  - workflowId: CheckIfUserExistsAndIfNotCreateIt
     summary: Login User and then retrieve pets
     description: This workflow lays out the steps to login a user and then retrieve pets
     inputs:
