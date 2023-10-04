@@ -6,8 +6,11 @@ info:
     This example is to illustrate how a company might provide a workflow using a single API they provide
   version: 1.0.0
 sourceDocuments:
-  - name: singleAPI
-    url: https://raw.githubusercontent.com/postman-open-technologies/apis/main/oapi-workflows/demo/singleApi.yaml
+  - name: geolocationAPI
+    url: https://raw.githubusercontent.com/postman-open-technologies/apis/main/oapi-workflows/demo/weather/api/geolocation.yaml
+    type: openapi
+  - name: weatherAPI
+    url: https://raw.githubusercontent.com/postman-open-technologies/apis/main/oapi-workflows/demo/weather/api/weather.yaml
     type: openapi
 
 workflows:

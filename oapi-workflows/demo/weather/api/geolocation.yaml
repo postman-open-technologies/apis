@@ -1,0 +1,119 @@
+openapi: '3.1.0'
+info:
+  version: '1.0.0'
+  title: 'Geolocation API'
+  description: Gets the geolocation details for a given IP address
+servers:
+  - url: https://api.ipgeolocation.io
+
+paths:
+  /geolocation:
+    parameters:
+      - name: apiKey
+        description: The API token to make API requests
+        in: query
+        required: true
+        schema:
+          type: string
+
+    get:
+      summary: Gets the geolocation of the provided IP from where the request is sent from
+      operationId: getGeoLocationDetails
+      security:
+        - ApiKey: []
+      responses:
+        '200':
+          description: The geolocation details of the requesting ip address
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/geodetails'
+
+components:
+  schemas:
+    geodetails:
+      ip:
+        type: string
+      continent_code:
+        type: string
+      continent_name:
+        type: string
+      country_code2:
+        type: string
+      country_code3:
+        type: string
+      country_name:
+        type: string
+      country_name_official:
+        type: string
+      country_capital:
+        type: string
+      state_prov:
+        type: string
+      state_code:
+        type: string
+      district:
+        type: string
+      city:
+        type: string
+      zipcode:
+        type: string
+      latitude:
+        type: string
+      longitude:
+        type: string
+      is_eu:
+        type: bool
+      calling_code:
+        type: string
+      country_tld:
+        type: string
+      language:
+        type: string
+      country_flag:
+        type: string
+      geoname_id:
+        type: string
+      isp:
+        type: string
+      connection_type:
+        type: string
+      organization:
+        type: string
+      currency:
+        $ref: "#/components/schemas/currency"
+      time_zone:
+        $ref: "#/components/schemas/timezone"
+
+    currency:
+      code:
+        type: string
+      name:
+        type: string
+      symbol:
+        type: string
+
+    timezone:
+      name:
+        type: string
+      offset:
+        type: number
+      offset_with_dst:
+        type: number
+      current_time:
+        type: string
+      current_time_unix:
+        type: string
+      is_dst:
+        type: bool
+      dst_savings:
+        type: number
+
+
+  securitySchemes:
+    ApiKey:
+      description:
+        The API token to allow API requests
+      type: apiKey
+      in: query
+      name: apiKey
