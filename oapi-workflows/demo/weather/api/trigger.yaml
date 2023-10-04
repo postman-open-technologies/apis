@@ -1,0 +1,26 @@
+openapi: '3.1.0'
+info:
+  version: '1.0.0'
+  title: 'Trigger API'
+  description: This API is called with geo/weather data to perform some function based on the geo/weather data provided
+servers:
+  - url: https://api.postman.com/triggers
+
+paths:
+  /triggers:
+    get:
+      summary: Using weather details will return a response based on those details
+      operationId: getTriggerResponse
+      responses:
+        '200':
+          description: The geolocation details of the requesting ip address
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/triggers'
+
+components:
+  schemas:
+    triggers:
+      name:
+        type: string
