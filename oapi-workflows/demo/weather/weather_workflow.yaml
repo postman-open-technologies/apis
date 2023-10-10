@@ -12,41 +12,40 @@ sourceDocuments:
   - name: weatherAPI
     url: https://raw.githubusercontent.com/postman-open-technologies/apis/main/oapi-workflows/demo/weather/api/weather.yaml
     type: openapi
+  - name: triggerAPI
+    url: https://raw.githubusercontent.com/postman-open-technologies/apis/main/oapi-workflows/demo/weather/api/trigger.yaml
+    type: openapi
 
 workflows:
-  - workflowId: CheckIfUserExistsAndIfNotCreateIt
-    summary: Login User and then retrieve pets
-    description: This workflow lays out the steps to login a user and then retrieve pets
+  - workflowId: GetWeatherForGeoLocation
+    summary: Get weather for geolocation
+    description: This workflow will get the geolocation info for the consumer request (e.g. using the request details) and return the weather for that location.
     inputs:
       type: object
       properties:
-        username:
+        geolocation_api_key:
           type: string
-        password:
+        weather_api_key:
           type: string
     steps:
-      - stepId: loginStep
-        description: This step demonstrates the user login step
-        operationId: loginUser
+      - stepId: getGeoLocationDetails
+        description: Using the Request details that are provided by the typical http request info, retrieve the geo details
+        operationId: geolocationAPI.getGeoLocationDetails
         parameters:
           # parameters to inject into the loginUser operation (parameter name must be resolvable at the referenced operation and the value is determined using {expression} syntax)
-          - name: username
+          - name: apikey
             in: query
-            value: $inputs.username
-          - name: password
-            in: query
-            value: $inputs.password
+            value: $inputs.geolocation_api_key
         successCriteria:
           # assertions to determine step was successful
           - $statusCode == 200
         outputs:
           # outputs from this step
-          tokenExpires: $response.header.X-Expires-After
-          rateLimit: $response.header.X-Rate-Limit
-          sessionToken: $response.body
-      - stepId: getPetStep
-        description: retrieve a pet by status from the GET pets endpoint
-        operationRef: https://petstore3.swagger.io/api/v3/openapi.json#/paths/users/~findbystatus~1{status}/get
+          longitude: $response.body.longitude
+          latitude: $response.body.latitude
+      - stepId: getWeatherForLongLat
+        description: Retrieves the weather details for the provided longitude and latitude
+        operationId: weatherAPI.getWeatherDetailsForGeoLocation
         dependsOn: loginStep
         parameters:
           - name: status

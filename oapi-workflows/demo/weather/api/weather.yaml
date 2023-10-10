@@ -1,0 +1,132 @@
+openapi: 3.1.0
+info:
+  version: 1.0.0
+  title: 'Weather API'
+  description: Gets the weather details for the provided longitude/latitude
+servers:
+  - url: https://api.openweathermap.org/data/2.5/weather
+
+paths:
+  /weater:
+    parameters:
+      - name: apiKey
+        description: The API token to make API requests
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: lon
+        description: The Longitude for the weather location request
+        in: query
+        required: true
+        schema:
+          type: string
+      - name: lat
+        description: The Latitude for the weather location request
+        in: query
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Gets the geolocation of the provided IP from where the request is sent from
+      operationId: getWeatherDetailsForGeoLocation
+      security:
+        - ApiKey: []
+      responses:
+        '200':
+          description: The weather details of the provided geolocation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/weatherDetails'
+
+components:
+  schemas:
+    weatherDetails:
+      coord:
+        $ref: "#/components/schemas/coord"
+      weather:
+        type: array
+        items:
+          $ref: "#/components/schemas/weather"
+      base:
+        type: string
+      main:
+        $ref: "#/components/schemas/main"
+      visibility:
+        type: number
+      wind:
+        $ref: "#/components/schemas/wind"
+      clouds:
+        $ref: "#/components/schemas/clouds"
+      dt:
+        type: number
+      sys:
+        $ref: "#/components/schemas/sys"
+      timezone:
+        type: number
+      id:
+        type: number
+      name:
+        type: string
+      cod:
+        type: number
+
+    wind:
+      speed:
+        type: number
+      deg:
+        type: number
+
+    clouds:
+      all:
+        type: number
+
+    sys:
+      type:
+        type: number
+      id:
+        type: number
+      country:
+        type: string
+      sunrise:
+        type: number
+      sunset:
+        type: number
+    coord:
+      lon:
+        type: number
+      lat:
+        type: number
+
+    weather:
+      id:
+        type: number
+      main:
+        type: string
+      description:
+        type: string
+      icon:
+        type: string
+
+    main:
+      temp:
+        type: number
+      feels_like:
+        type: number
+      temp_min:
+        type: number
+      temp_max:
+        type: number
+      pressure:
+        type: number
+      humidity:
+        type: number
+
+  securitySchemes:
+    ApiKey:
+      description:
+        The API token to allow API requests
+      type: apiKey
+      in: query
+      name: apiKey
