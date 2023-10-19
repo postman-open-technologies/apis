@@ -1,7 +1,7 @@
-openapi: '3.1.0'
+openapi: 3.0.0
 info:
-  version: '1.0.0'
-  title: 'Geolocation API'
+  version: 1.0.0
+  title: Geolocation API
   description: Gets the geolocation details for a given IP address
 servers:
   - url: https://api.ipgeolocation.io
@@ -32,82 +32,89 @@ paths:
 components:
   schemas:
     geodetails:
-      ip:
-        type: string
-      continent_code:
-        type: string
-      continent_name:
-        type: string
-      country_code2:
-        type: string
-      country_code3:
-        type: string
-      country_name:
-        type: string
-      country_name_official:
-        type: string
-      country_capital:
-        type: string
-      state_prov:
-        type: string
-      state_code:
-        type: string
-      district:
-        type: string
-      city:
-        type: string
-      zipcode:
-        type: string
-      latitude:
-        type: string
-      longitude:
-        type: string
-      is_eu:
-        type: bool
-      calling_code:
-        type: string
-      country_tld:
-        type: string
-      language:
-        type: string
-      country_flag:
-        type: string
-      geoname_id:
-        type: string
-      isp:
-        type: string
-      connection_type:
-        type: string
-      organization:
-        type: string
-      currency:
-        $ref: "#/components/schemas/currency"
-      time_zone:
-        $ref: "#/components/schemas/timezone"
+      x-codegen-name: GeoDetails
+      type: object
+      properties:
+        ip:
+          type: string
+        continent_code:
+          type: string
+        continent_name:
+          type: string
+        country_code2:
+          type: string
+        country_code3:
+          type: string
+        country_name:
+          type: string
+        country_name_official:
+          type: string
+        country_capital:
+          type: string
+        state_prov:
+          type: string
+        state_code:
+          type: string
+        district:
+          type: string
+        city:
+          type: string
+        zipcode:
+          type: string
+        latitude:
+          type: string
+        longitude:
+          type: string
+        is_eu:
+          type: boolean
+        calling_code:
+          type: string
+        country_tld:
+          type: string
+        language:
+          type: string
+        country_flag:
+          type: string
+        geoname_id:
+          type: string
+        isp:
+          type: string
+        connection_type:
+          type: string
+        organization:
+          type: string
+        currency:
+          $ref: "#/components/schemas/currency"
+        timezone:
+          $ref: "#/components/schemas/timezone"
 
     currency:
-      code:
-        type: string
-      name:
-        type: string
-      symbol:
-        type: string
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        symbol:
+          type: string
 
     timezone:
-      name:
-        type: string
-      offset:
-        type: number
-      offset_with_dst:
-        type: number
-      current_time:
-        type: string
-      current_time_unix:
-        type: string
-      is_dst:
-        type: bool
-      dst_savings:
-        type: number
+      type: object
+      properties:
+        name:
+          type: string
+        offset:
+          type: number
+        offset_with_dst:
+          type: number
+        current_time:
+          type: string
+        current_time_unix:
+          type: string
+        is_dst:
+          type: boolean
+        dst_savings:
+          type: number
 
 
   securitySchemes:

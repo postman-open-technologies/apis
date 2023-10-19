@@ -1,7 +1,7 @@
-openapi: '3.1.0'
+openapi: 3.0.0
 info:
-  version: '1.0.0'
-  title: 'Trigger API'
+  version: 1.0.0
+  title: Trigger API
   description: This API is called with geo/weather data to perform some function based on the geo/weather data provided
 servers:
   - url: https://api.postman.com/triggers
@@ -22,5 +22,8 @@ paths:
 components:
   schemas:
     triggers:
-      name:
-        type: string
+      type: object
+      properties:
+        name:
+          type: string
+
